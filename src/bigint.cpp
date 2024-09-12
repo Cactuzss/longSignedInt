@@ -52,10 +52,21 @@ std::string bigint::to_string() const
 	std::string res = "";
 	if (this->m_bSign == MINUS) res = "-";
 	for (auto it = this->m_vDigits.rbegin(); it != this->m_vDigits.rend(); it++)
+	{
 		if (*it != 0)
-			res += std::to_string(*it);
+		{
+			std::string tmp = std::to_string(*it);
+
+			if (it != this->m_vDigits.rbegin() && tmp.size() != 10)
+				while (tmp.size() != 9) tmp = "0" + tmp;
+
+			res += tmp;
+		}
 		else
+		{
 			res += "000000000";
+		}
+	}
 
 	return res;
 }
@@ -167,7 +178,7 @@ const bigint bigint::operator* (const bigint& other) const
 	const bigint& a = this->m_bSign == MINUS ? -*this : *this;
 	const bigint& b = other.m_bSign == MINUS ? -other : other;
 
-	res.m_vDigits = std::vector<int64_t>(a.m_vDigits.size() * b.m_vDigits.size(), 0);
+	res.m_vDigits = std::vector<int64_t>(a.m_vDigits.size() * b.m_vDigits.size() + 1, 0);
 
 	for (size_t i = 0; i < a.m_vDigits.size(); i++)
 	{
