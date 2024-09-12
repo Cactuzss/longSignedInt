@@ -57,7 +57,7 @@ std::string bigint::to_string() const
 		{
 			std::string tmp = std::to_string(*it);
 
-			if (it != this->m_vDigits.rbegin() && tmp.size() != 10)
+			if (it != this->m_vDigits.rbegin())
 				while (tmp.size() != 9) tmp = "0" + tmp;
 
 			res += tmp;
