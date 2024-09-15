@@ -59,7 +59,7 @@ bigint::bigint(std::string& str)
 		this->m_bSign = MINUS;
 		str[0] = '0';
 	}
-	else if (str[0] = '+')
+	else if (str[0] == '+')
 		str[0] = '0';
 
 	size_t digit = 0;
