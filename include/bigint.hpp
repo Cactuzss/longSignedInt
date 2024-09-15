@@ -14,6 +14,7 @@ public:
     bigint();
     bigint(long long);
     bigint(const bigint &obj);
+    bigint(std::string&);
 
     void normalize(void);
     std::string to_string() const;

@@ -47,6 +47,45 @@ bigint::bigint(const bigint& obj)
 	this->m_vDigits = obj.m_vDigits;
 }
 
+bigint::bigint(std::string& str)
+{
+	this->m_vDigits = std::vector<int64_t>();
+	this->m_bSign = PLUS;
+
+	static const int digitSize = std::log10(this->m_iBase);
+
+	if (str[0] == '-')
+	{
+		this->m_bSign = MINUS;
+		str[0] = '0';
+	}
+	else if (str[0] = '+')
+		str[0] = '0';
+
+	size_t digit = 0;
+
+	while (!str.empty())
+	{
+		std::string tmp = "";
+
+		if (str.size() >= digitSize)
+		{
+			tmp = str.substr(str.size() - digitSize, digitSize);
+			for (int i = 0; i < digitSize; i++) str.pop_back();
+		}
+		else
+		{
+			tmp = str;
+			str = "";
+		}
+
+		this->m_vDigits.push_back(std::stoi(tmp));
+	}
+
+	while (this->m_vDigits.back() == 0)
+		this->m_vDigits.pop_back();
+}
+
 std::string bigint::to_string() const
 {
 	std::string res = "";
