@@ -209,8 +209,8 @@ bool bigint::operator<  (const bigint& other) const
 {
 	if (this->m_vDigits.size() != other.m_vDigits.size()) return this->m_vDigits.size() < other.m_vDigits.size();
 
-	auto& a = this->m_vDigits.rbegin();
-	auto& b = other.m_vDigits.rbegin();
+	auto a = this->m_vDigits.rbegin();
+	auto b = other.m_vDigits.rbegin();
 
 	for (a, b; a != this->m_vDigits.rend(); a++, b++)
 	{
@@ -224,8 +224,8 @@ bool bigint::operator>  (const bigint& other) const
 {
 	if (this->m_vDigits.size() != other.m_vDigits.size()) return this->m_vDigits.size() > other.m_vDigits.size();
 
-	auto& a = this->m_vDigits.rbegin();
-	auto& b = other.m_vDigits.rbegin();
+	auto a = this->m_vDigits.rbegin();
+	auto b = other.m_vDigits.rbegin();
 
 	for (a, b; a != this->m_vDigits.rend(); a++, b++)
 	{
@@ -239,8 +239,8 @@ bool bigint::operator== (const bigint& other) const
 {
 	if (this->m_vDigits.size() != other.m_vDigits.size()) false;
 
-	auto& a = this->m_vDigits.rbegin();
-	auto& b = other.m_vDigits.rbegin();
+	auto a = this->m_vDigits.rbegin();
+	auto b = other.m_vDigits.rbegin();
 
 	for (a, b; a != this->m_vDigits.rend(); a++, b++)
 		if (*a != *b) return false;
