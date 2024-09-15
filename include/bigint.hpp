@@ -34,9 +34,5 @@ public:
 
     bigint operator- () const;
 
-    bigint operator+ (const long long&);
-    bigint operator* (const long long&);
-    bigint operator/ (const long long&);
-
     friend std::ostream& operator<<(std::ostream& os, const bigint& i);
 };
