@@ -143,25 +143,15 @@ const bigint bigint::operator+ (const bigint& other) const
 		if (res.m_vDigits.size() == i)
 			res.m_vDigits.push_back(0);
 
-		uint64_t val = 0;
+		uint64_t val = carry;
 
+		if (i < this->m_vDigits.size())
+			val += this->m_vDigits[i];
 		if (i < other.m_vDigits.size())
-			val = this->m_vDigits[i] + other.m_vDigits[i] + carry;
-		else if (i < this->m_vDigits.size())
-			val = this->m_vDigits[i] + carry;
-		else
-			val = carry;
+			val += other.m_vDigits[i];
 
-		if (val == this->m_iBase)
-			carry = 1;
-		else
-			carry = val / this->m_iBase;
-
-		if (carry)
-			val = val % this->m_iBase;
-
-		res.m_vDigits[i] = val;
-
+		carry = val / this->m_iBase;
+		res.m_vDigits[i] = val % this->m_iBase;
 	}
 
 	if (this->m_bSign == MINUS)
